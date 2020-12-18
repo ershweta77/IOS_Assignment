@@ -17,6 +17,7 @@
 		1868B67C258BE4EF0000929A /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1868B67B258BE4EF0000929A /* Book.swift */; };
 		1868B681258BE6A40000929A /* BooksListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1868B680258BE6A40000929A /* BooksListController.swift */; };
 		1868B683258BE6EF0000929A /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1868B682258BE6EF0000929A /* BookTableViewCell.swift */; };
+		18BA6524258C84CB002C5F1F /* BooksInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA6523258C84CB002C5F1F /* BooksInt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		1868B67B258BE4EF0000929A /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		1868B680258BE6A40000929A /* BooksListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksListController.swift; sourceTree = "<group>"; };
 		1868B682258BE6EF0000929A /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		18BA6523258C84CB002C5F1F /* BooksInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksInt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		1868B67E258BE6800000929A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				18BA6523258C84CB002C5F1F /* BooksInt.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				1868B67C258BE4EF0000929A /* Book.swift in Sources */,
 				1868B681258BE6A40000929A /* BooksListController.swift in Sources */,
 				1826D003258BDACC0024DE69 /* SceneDelegate.swift in Sources */,
+				18BA6524258C84CB002C5F1F /* BooksInt.swift in Sources */,
 				1868B683258BE6EF0000929A /* BookTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

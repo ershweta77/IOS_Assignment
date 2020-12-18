@@ -15,6 +15,13 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
     // variable declaration
     var listOfBooksArr: [String] = []
     var filteredBooks: [String] = []
+    lazy var datePicker: UIDatePicker = {
+    let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.backgroundColor = UIColor.white
+        picker.frame = CGRect(x:0.0, y:self.view.frame.height-350, width:self.view.frame.width, height:350)
+        return picker
+    }()
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true

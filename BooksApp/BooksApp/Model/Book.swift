@@ -8,6 +8,23 @@
 
 import Foundation
 
-struct Book:Codable {
-    
+
+struct Response : Codable
+{
+    struct Results : Codable
+    {
+        struct Lists : Codable {
+            var books : [Book]
+       }
+        var lists : [Lists]
+    }
+    var results : Results
+}
+
+struct Book : Codable {
+    var contributor: String!
+    var publisher: String!
+    var description: String!
+    var title: String!
+    var author: String!
 }
