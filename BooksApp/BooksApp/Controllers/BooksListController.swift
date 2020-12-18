@@ -43,6 +43,7 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
         navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
