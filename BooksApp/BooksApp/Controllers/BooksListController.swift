@@ -11,17 +11,11 @@ import UIKit
 class BooksListController: UITableViewController, UISearchControllerDelegate,UISearchBarDelegate {
 
     @IBOutlet weak var changeDateBtn: UIBarButtonItem!
-    
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerBackgoundView: UIView!
     // variable declaration
     var listOfBooksArr: [Book] = []
     var filteredBooks: [Book] = []
-    lazy var datePicker: UIDatePicker = {
-    let picker = UIDatePicker()
-        picker.datePickerMode = .date
-        picker.backgroundColor = UIColor.white
-        picker.frame = CGRect(x:0.0, y:self.view.frame.height-350, width:self.view.frame.width, height:350)
-        return picker
-    }()
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -66,7 +60,14 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
     }
     
     @IBAction func changeDate(_ sender: UIBarButtonItem) {
-      
+        datePickerBackgoundView.isHidden = false
+    }
+    
+    @IBAction func datePickerValueChanged(sender: UIDatePicker) {
+        // Function will be called every time picker changes it's value
+        self.getBooks(dateStr: self.getDateFormatter().string(from: sender.date))
+        datePickerBackgoundView.isHidden = true
+        self.dismiss(animated: true, completion: nil)
     }
     
     func getDateFormatter() -> DateFormatter

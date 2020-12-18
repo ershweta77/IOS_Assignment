@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aBA-XC-ftQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aBA-XC-ftQ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Books-->
         <scene sceneID="h7U-kM-CKz">
             <objects>
-                <tableViewController id="bhX-OZ-bH3" customClass="BooksListController" customModule="BooksApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="bhX-OZ-bH3" customClass="BooksListController" customModule="BooksApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nkn-pT-GkC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" hidden="YES" contentMode="scaleToFill" id="yqg-no-cBO">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="cDv-rd-Ff7">
+                                    <rect key="frame" x="12" y="10" width="402" height="40"/>
+                                    <connections>
+                                        <action selector="datePickerValueChangedWithSender:" destination="bhX-OZ-bH3" eventType="valueChanged" id="hif-Np-D0Q"/>
+                                    </connections>
+                                </datePicker>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="cDv-rd-Ff7" secondAttribute="trailing" id="OjT-Us-0P2"/>
+                                <constraint firstAttribute="bottom" secondItem="cDv-rd-Ff7" secondAttribute="bottom" id="kdp-ao-U5M"/>
+                                <constraint firstItem="cDv-rd-Ff7" firstAttribute="top" secondItem="yqg-no-cBO" secondAttribute="top" constant="10" id="rjB-B8-T6o"/>
+                                <constraint firstItem="cDv-rd-Ff7" firstAttribute="leading" secondItem="yqg-no-cBO" secondAttribute="leading" constant="12" id="sk7-ud-fpK"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="zAR-vn-9ch" customClass="BookTableViewCell" customModule="BooksApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="127.5"/>
+                                <rect key="frame" x="0.0" y="78" width="414" height="127.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zAR-vn-9ch" id="Hdg-5b-bjm">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="127.5"/>
@@ -117,6 +138,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="changeDateBtn" destination="5KI-hF-Iyg" id="3tJ-Pt-5vm"/>
+                        <outlet property="datePicker" destination="cDv-rd-Ff7" id="6tx-k8-OxW"/>
+                        <outlet property="datePickerBackgoundView" destination="yqg-no-cBO" id="WIg-OL-fXy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QfF-xU-ZkK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -140,4 +163,9 @@
             <point key="canvasLocation" x="138" y="764"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
