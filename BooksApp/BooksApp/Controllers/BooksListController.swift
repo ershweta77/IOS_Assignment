@@ -13,8 +13,8 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
     @IBOutlet weak var changeDateBtn: UIBarButtonItem!
     
     // variable declaration
-    var listOfBooksArr: [String] = []
-    var filteredBooks: [String] = []
+    var listOfBooksArr: [Book] = []
+    var filteredBooks: [Book] = []
     lazy var datePicker: UIDatePicker = {
     let picker = UIDatePicker()
         picker.datePickerMode = .date
@@ -34,6 +34,12 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setUpSearchViewController()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 160
+        
+        // current date
+        let date = Date()
+        self.getBooks(dateStr: self.getDateFormatter().string(from: date))
     }
     func setUpSearchViewController(){
         
@@ -50,9 +56,11 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        
-        filteredBooks = listOfBooksArr.filter {(book : String) -> Bool in
-            return book.lowercased().contains(searchText.lowercased())
+        filteredBooks = listOfBooksArr.filter { (book: Book) -> Bool in
+            return book.title.lowercased().contains(searchText.lowercased()) ||         book.description.lowercased().contains(searchText.lowercased()) ||
+                book.author.lowercased().contains(searchText.lowercased()) ||
+                book.publisher.lowercased().contains(searchText.lowercased()) ||
+                book.contributor.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()
     }
@@ -61,14 +69,40 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
       
     }
     
+    func getDateFormatter() -> DateFormatter
+    {
+     let dateFormatter = DateFormatter()
+     dateFormatter.dateFormat = "yyyy-MM-dd"
+     return dateFormatter
+    }
+
+    func getBooks(dateStr:String){
+        BooksInt.init().getListOfBooks(date:dateStr) {  (result: Result<Response, Error>) in
+            switch result {
+            case .success(let response):
+                var books:[Book] = []
+                for list in response.results.lists{
+                    for book in list.books{
+                        books.append(book)
+                    }
+                }
+                self.listOfBooksArr = books
+                print("list of books\(self.listOfBooksArr.count)")
+            case .failure(let error):
+                print(error)
+                self.listOfBooksArr.removeAll()
+            }
+            
+            self.tableView.reloadData()
+        }
+    }
     // table view
    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    if isFiltering
-//    {
-//        return filteredBooks.count
-//    }
-//    return listOfBooksArr.count
-        return 1
+    if isFiltering
+    {
+        return filteredBooks.count
+    }
+    return listOfBooksArr.count
     }
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -77,18 +111,17 @@ class BooksListController: UITableViewController, UISearchControllerDelegate,UIS
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BookTableViewCell
         
+        let book: Book
         if isFiltering {
-            
-            print("filtered array")
-        }else
-        {
-            print("all objects")
+            book = filteredBooks[indexPath.row]
+        } else {
+            book = listOfBooksArr[indexPath.row]
         }
-        cell.titleLbl.text = "title"
-        cell.authorLbl.text = "author"
-        cell.publisherLbl.text = "publisher"
-        cell.contributorLbl.text = "contributor"
-        cell.descriptionLbl.text = "description"
+        cell.titleLbl.text = book.title
+        cell.authorLbl.text = book.author
+        cell.publisherLbl.text = book.publisher
+        cell.contributorLbl.text = book.contributor
+        cell.descriptionLbl.text = book.description
         return cell
     }
     
